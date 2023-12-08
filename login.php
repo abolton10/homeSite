@@ -7,28 +7,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ? LIMIT 1");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
 
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['user_role'] = $user['role'];
+        // Verify the password using password_verify
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_role'] = $user['role'];
 
-        switch ($user['role']) {
-            case 'seller':
-                header('Location: seller_dashboard.php');
-                break;
-            case 'buyer':
-                header('Location: buyer_dashboard.php'); //could really insert a blank page like coming soon for these
-                break;
-            case 'admin':
-                header('Location: admin_dashboard.php');
-                break;
-            default:
-
-                break;
+            switch ($user['role']) {
+                case 'seller':
+                    header('Location: seller-dashboard.php'); //a dummy file
+                    break;
+                case 'buyer':
+                    header('Location: buyer-dashboard.php'); 
+                    break;
+                case 'admin':
+                    header('Location: admin-dashboard.php');//a dummy file
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            echo "Invalid email or password";
         }
     } else {
         echo "Invalid email or password";
@@ -66,3 +73,4 @@ $conn->close();
 </body>
 
 </html>
+
