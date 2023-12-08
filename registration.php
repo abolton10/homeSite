@@ -15,8 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($conn->query($sql) === TRUE) {
         $registrationMessage = "Registration successful!";
         
-        // Redirect to the buyer dashboard after successful sign in
-        header("Location: buyer-dashboard.php");
+        header("Location: login.php");
         exit(); 
     } else {
         $registrationMessage = "Error: " . $sql . "<br>" . $conn->error;
