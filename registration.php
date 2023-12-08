@@ -13,10 +13,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$hashedPassword')";
 
     if ($conn->query($sql) === TRUE) {
-        $registrationMessage = "Registration successful!";
-        
-        header("Location: login.php");
-        exit(); 
+        $registrationMessage = "Registration successful! <a href='login.php'>Login here</a>.";
+
     } else {
         $registrationMessage = "Error: " . $sql . "<br>" . $conn->error;
     }
@@ -29,35 +27,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Registration</title>
+    <title>Registration Complete!</title>
     <link rel="stylesheet" href="homesite.css">
 </head>
 
 <body>
 
     <div class="signup-container">
-        <h2>User Registration</h2>
-        <form action="registration.php" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <button type="submit">Register</button>
-        </form>
-    </div>
-
-    <script>
-        // Display pop-up message if registration is successful
+        <!-- Display pop-up message with a link to the login page -->
         <?php if (!empty($registrationMessage)) : ?>
-            alert("<?php echo $registrationMessage; ?>");
+            <p><?php echo $registrationMessage; ?></p>
         <?php endif; ?>
-    </script>
+    </div>
 
 </body>
 
 </html>
+
+
