@@ -17,11 +17,6 @@ header {
     align-items: center;
 }
 
-header img {
-    max-height: 60px;
-    margin-right: 20px;
-}
-
 nav ul {
     list-style-type: none;
     display: flex;
@@ -131,4 +126,51 @@ footer p {
     nav a {
         margin: 0.5rem 0;
     }
+}
+.signup-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 2rem;
+    background-color: #ecf0f1;
+    color: #2c3e50;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.signup-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #3498db;
+}
+
+.signup-container label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.signup-container input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #3498db;
+}
+
+.signup-container button {
+    background-color: #e74c3c;
+    color: #ecf0f1;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.signup-container button:hover {
+    background-color: #c0392b;
+}
+.registration-message {
+    color: #2ecc71;
+    font-weight: bold;
+    margin-top: 10px;
 }
