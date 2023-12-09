@@ -1,5 +1,5 @@
 <?php
-$servername = "codd.cs.gsu.edu";
+$servername = "localhost";
 $username = "abolton10";
 $password = "abolton10";
 $dbname = "abolton10";
