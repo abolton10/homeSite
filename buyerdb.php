@@ -59,15 +59,39 @@ $sql ="CREATE TABLE IF NOT EXISTS properties (
                         <li><a href="#">Sell</a></li>
                         <li><a href="#">About Us</a></li>
                         <li><a href="login.php">Login</a></li>
-                        <li><input type="text" placeholder="Search.."></li>
-                        <!-- TODO Implement search bar and filter database with 2-3 queries -->
+                        
                     </ul>
                 </nav>
             </div>
         </header>
 
         <div class="content">
+        <form method="get" action=""search.php"">
+            <input type="text" name="query" placeholder="Search...">
+            <select name="filter">
+                <option value="property_value">Property Value</option>
+                <option value="square_footage">Square Footage</option>
+                <option value="bedrooms">Bedrooms</option>
+            </select>
+            <button type="submit">Search</button>
+        </form>
+
+        <?php
+        if ($_SERVER["REQUEST_METHOD"] == "GET") {
+            $searchQuery = isset($_GET['query']) ? mysqli_real_escape_string($connection, $_GET['query']) : '';
+            $filter = isset($_GET['filter']) ? mysqli_real_escape_string($connection, $_GET['filter']) : '';
         
+            $sql = "SELECT * FROM properties WHERE $filter LIKE '%$searchQuery%'";
+        
+            $result = mysqli_query($connection, $sql);
+        
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<div>{$row['location']} - {$row['floor_plan']} - {$row['property_value']}</div>";
+            }
+        
+            mysqli_close($connection);
+        }
+        ?>
         <h2>Your Wishlist</h2>
         <!-- TODO Search Database and display wishlisted properties-->
         </div>
