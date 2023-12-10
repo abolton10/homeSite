@@ -66,7 +66,7 @@ $sql ="CREATE TABLE IF NOT EXISTS properties (
         </header>
 
         <div class="content">
-        <form method="get" action=""search.php"">
+        <form method="get" action="">
             <input type="text" name="query" placeholder="Search...">
             <select name="filter">
                 <option value="property_value">Property Value</option>
